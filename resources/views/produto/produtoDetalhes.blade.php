@@ -6,7 +6,7 @@
 
 <div class="text-center">
 
-           
+
         COD Marca: </br>{{$list->idmarca}} </br></br>
         COD Modelo: </br>{{$list->idmarca}} </br></br>
         Nome Marca: </br>{{$list->nome_marca}} </br></br>
