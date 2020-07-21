@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1 class="text-center">Visualizar</h1> <hr>
+</br></br>
 
 <div class="text-center">
 
@@ -17,7 +17,7 @@
         Estoque:</br>{{$list->estoque}}</br></br>
 
         <a href="/EditarModeloDetalhado/{{$list->id_produto}}">
-            <button class="btn btn-primary">Editar</button>
+            <button class="btn btn-outline-primary">Editar</button>
         </a>
         </br></br>
 
