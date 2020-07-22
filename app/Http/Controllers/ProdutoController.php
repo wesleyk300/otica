@@ -12,17 +12,17 @@ use App\User;
 class ProdutoController extends Controller
 {
     private $objMarca;
-    
+
     public function __construct(){
         $this->objMarca = new ModelMarca();
 
     }
 
     public function index()
-    {   
+    {
         $list=  $this->objMarca->all();
-    
-        return view('produto.saveModelo', compact('list')); 
+
+        return view('produto.saveModelo', compact('list'));
     }
 
 
@@ -33,25 +33,28 @@ class ProdutoController extends Controller
         $replace = array('', '.');
         $valorEntrada = str_replace($source, $replace, $request->entrada);
         $valorSaida = str_replace($source, $replace, $request->saida);
-       
 
-              DB::table('produto')->insert([
-                'marca_idmarca'=>$request->marca,
-                'modelo_produto'=>$request->modelo,
-                'cor_produto'=>$request->cor,
-                'ref_produto'=>$request->referencia,
-                'estoque'=>$request->quantidade,
-                'valor_entrada'=>$valorEntrada,
-                'valor_saida'=>$valorSaida                
+
+              DB::table('produto')
+                    ->insert([
+                    'marca_idmarca'=>$request->marca,
+                    'modelo_produto'=>$request->modelo,
+                    'cor_produto'=>$request->cor,
+                    'ref_produto'=>$request->referencia,
+                    'estoque'=>$request->quantidade,
+                    'valor_entrada'=>$valorEntrada,
+                    'valor_saida'=>$valorSaida
             ]);
 
-            
+
+
+
             return redirect()->route('salvar.modelo.armacao')
                     ->with('mensagem', 'Modelo cadastrado com sucesso.');
 
     }
 
-    
+
 
 
 
@@ -64,28 +67,80 @@ class ProdutoController extends Controller
             ->select('id_produto', 'modelo_produto')
             ->where('marca_idmarca', $id)
             ->get();
-            return view ('produto.modelo',compact('list')) ; 
+            return view ('produto.modelo',compact('list')) ;
     }
 
-    
+
     public function mostrarModeloDetalhes($id)
     {
         $list = DB::table('produto')
                     ->join('marca', 'produto.marca_idmarca', '=', 'marca.idmarca')
                     ->where('id_produto', $id)
                     ->first();
-            return view ('produto.produtoDetalhes',compact('list')) ; 
+            return view ('produto.produtoDetalhes',compact('list')) ;
     }
 
-      
-    
+    public function editarModelo($id)
+    {
+        $list = DB::table('produto')
+                    ->where('id_produto', $id)
+                    ->first();
+            return view ('produto.editarProdutosDetalhes',compact('list')) ;
+    }
+
+    public function saveUpdate(Request $request)
+    {
+        $source = array('.', ',');
+        $replace = array('', '.');
+        $valorEntrada = str_replace($source, $replace, $request->entrada);
+        $valorSaida = str_replace($source, $replace, $request->saida);
+
+        $request -> validate([
+            'modelo' => 'required | unique:produto,modelo_produto',
+            'cor' => 'required',
+            'referencia' => 'required',
+            'quantidade' => 'required',
+            'entrada' => 'required',
+            'saida' => 'required'
+        ],[
+            'modelo.required' => 'Informar modelo',
+            'cor.required' => 'Informar cor',
+            'referencia.required' => 'Informar referência',
+            'quantidade.required' => 'Informar quantidade',
+            'entrada.required' => 'Informar entrda',
+            'saida.required' => 'Informar saída',
+        ]);
+
+
+
+              DB::table('produto')
+                    ->where('id_produto', $request->id_produto)
+                    ->update([
+                    'modelo_produto'=>$request->modelo,
+                    'cor_produto'=>$request->cor,
+                    'ref_produto'=>$request->referencia,
+                    'estoque'=>$request->quantidade,
+                    'valor_entrada'=>$valorEntrada,
+                    'valor_saida'=>$valorSaida
+                    ]);
+
+
+
+            return  back()
+                        ->with('mensagem', 'Modelo editado com sucesso.');;
+    }
+
+
+
+
+
     /*public function index($id)
     {
         $list = DB::table('produto')
             ->where('marca_idmarca',$id)
             ->get();
-        
-        return view ('armacao.index',compact('list')) ; 
+
+        return view ('armacao.index',compact('list')) ;
     }*/
 
 
@@ -95,7 +150,7 @@ class ProdutoController extends Controller
     {
         $lsit=  $this->objProduto->all();
 
-        return view ('index',compact('lsit')) ; 
+        return view ('index',compact('lsit')) ;
     }
 */
 
@@ -132,7 +187,7 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-    
+
     }
 
     /**

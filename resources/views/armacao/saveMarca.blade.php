@@ -15,7 +15,7 @@
         <div class="alert alert-success">
             {{ session('mensagem') }}
         </div>
-        @endif
+    @endif
 
     @csrf
       <p class="ex1">
@@ -23,7 +23,7 @@
         <label for="exampleFormControlInput1">Marca:</label>
         <input type="text" name="marca" class="form-control" id="exampleFormControlInput1" placeholder="Digite...">
         <br>
-        
+
         <br><br>
         <div class="col text-center">
           <button type="submit" class="btn btn-outline-primary">Salvar</button>
