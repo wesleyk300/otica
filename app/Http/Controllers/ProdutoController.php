@@ -46,20 +46,10 @@ class ProdutoController extends Controller
                     'valor_saida'=>$valorSaida
             ]);
 
-
-
-
-            return redirect()->route('salvar.modelo.armacao')
+            return  back()
                     ->with('mensagem', 'Modelo cadastrado com sucesso.');
 
     }
-
-
-
-
-
-
-
 
     public function mostrarModelo($id)
     {
@@ -130,10 +120,6 @@ class ProdutoController extends Controller
                         ->with('mensagem', 'Modelo editado com sucesso.');;
     }
 
-
-
-
-
     /*public function index($id)
     {
         $list = DB::table('produto')
@@ -144,8 +130,6 @@ class ProdutoController extends Controller
     }*/
 
 
-
-
     /*public function index()
     {
         $lsit=  $this->objProduto->all();
@@ -153,11 +137,6 @@ class ProdutoController extends Controller
         return view ('index',compact('lsit')) ;
     }
 */
-
-
-
-
-
     /**
      * Show the form for creating a new resource.
      *

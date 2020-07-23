@@ -2,7 +2,6 @@
 
 @section('content')
 
-<h1>sdfafsssssajmgojangao</h1>
 <div class="limiter">
 		<div class="container-table100">
 			<div class="wrap-table100">
