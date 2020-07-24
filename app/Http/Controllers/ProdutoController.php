@@ -94,6 +94,7 @@ class ProdutoController extends Controller
             'saida' => 'required'
         ],[
             'modelo.required' => 'Informar modelo',
+            'modelo.unique' => 'Modelo já existe',
             'cor.required' => 'Informar cor',
             'referencia.required' => 'Informar referência',
             'quantidade.required' => 'Informar quantidade',

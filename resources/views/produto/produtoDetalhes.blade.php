@@ -5,7 +5,7 @@
 </br></br>
 
 <div class="text-center">
-
+    <p class="font-weight-bolder">produtoDetalhes</p>
 
         COD Marca: </br>{{$list->idmarca}} - {{$list->nome_marca}}</br></br>
         COD Modelo: </br>{{$list->id_produto}} </br></br>
@@ -16,9 +16,19 @@
         Valor Saída: </br>{{number_format($list->valor_saida, 2, ',', '.')}}</br></br>
         Estoque:</br>{{$list->estoque}}</br></br>
 
+
+        <div class="col text-center">
         <a href="/EditarModeloDetalhado/{{$list->id_produto}}">
-            <button class="btn btn-outline-primary">Editar</button>
+            <button class="btn btn-outline-success">Editar</button>
         </a>
+        </div>
+
+        
+        <div class="col text-center">
+            <a href="/modelo/{{$list->marca_idmarca}}">
+            <button class="btn btn-outline-primary">Voltar</button>
+            </a>
+            </div>
         </br></br>
 
 </div>

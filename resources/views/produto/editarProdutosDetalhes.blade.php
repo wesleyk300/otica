@@ -5,6 +5,7 @@
 <p class="ex1">
     <div class="form-style-1">
         <p class="font-weight-bolder">Editar Modelo de Armação</p>
+        <p class="font-weight-bolder">editarProdutosDetalhes</p>
 
 <form method="POST" action="{{route('update.modelo')}}">
     @csrf
@@ -67,10 +68,19 @@
         <br><br>
 
         <div class="col text-center">
-          <button type="submit" class="btn btn-outline-primary">Salvar</button>
+          <button type="submit" class="btn btn-outline-success">Salvar</button>
         </div>
       </div>
-    </form>
+
+      <div class="col text-center">
+        <a href="/modelo/{{$list->marca_idmarca}}">
+        <button class="btn btn-outline-primary">Voltar</button>
+        </a>
+        </div>
+
+     </form>
+
+
 
 </p>
 
