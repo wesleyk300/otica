@@ -86,7 +86,7 @@ class ProdutoController extends Controller
         $valorSaida = str_replace($source, $replace, $request->saida);
 
         $request -> validate([
-            'modelo' => 'required | unique:produto,modelo_produto',
+            'modelo' => 'required',
             'cor' => 'required',
             'referencia' => 'required',
             'quantidade' => 'required',
@@ -117,8 +117,9 @@ class ProdutoController extends Controller
 
 
 
-            return  back()
-                        ->with('mensagem', 'Modelo editado com sucesso.');;
+                return redirect()->route('modelo', [$request->marca_idmarca])
+                        ->with('mensagemDeSucesso', 'Modelo editado com sucesso.');
+                        
     }
 
     /*public function index($id)

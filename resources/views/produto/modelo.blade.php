@@ -6,6 +6,13 @@
 		<div class="container-table100">
 			<div class="wrap-table100">
 
+        @if (session('mensagemDeSucesso'))
+        <div class="alert alert-success">
+            {{ session('mensagemDeSucesso') }}
+        </div>
+        @endif
+
+
 				<div class="table100 ver2 m-b-110">
 					<table data-vertable="ver2">
 						<thead>

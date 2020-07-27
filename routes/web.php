@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //marca armacao
-Route::get('/marca','MarcaControler@index');
+Route::get('/marca','MarcaControler@index')->name('marca');
 
 Route::get('/marca/createMarca','MarcaControler@createMarca')->name('register.marca.armacao'); //abrir pagina para registrar
 Route::post('/marca/registrarMarca','MarcaControler@saveMarca')->name('save.marca.armacao'); //pega os dados para registrar no banco

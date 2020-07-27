@@ -14,13 +14,13 @@
 
 
         <input type="hidden" name="id_produto" value="{{$list->id_produto}}">
+        <input type="hidden" name="marca_idmarca" value="{{$list->marca_idmarca}}">
+        <h1>{{$list->id_produto}}</h1>
+        <h1>{{$list->marca_idmarca}}</h1>
+
         <br>
 
-        @if (session('mensagem'))
-        <div class="alert alert-success">
-            {{ session('mensagem') }}
-        </div>
-        @endif
+
 
         @if ($errors->any())
         <div class="alert alert-danger">
@@ -68,18 +68,15 @@
         <br><br>
 
         <div class="col text-center">
-          <button type="submit" class="btn btn-outline-success">Salvar</button>
-        </div>
-      </div>
+        <button style="margin-right: 30px"; type="submit" class="btn btn-outline-success">Salvar</button>
 
-      <div class="col text-center">
-        <a href="/modelo/{{$list->marca_idmarca}}">
-        <button class="btn btn-outline-primary">Voltar</button>
-        </a>
-        </div>
+
 
      </form>
-
+        <a href="/modelo/{{$list->marca_idmarca}}">
+        <button class="btn btn-outline-danger">Cancelar</button>
+        </a>
+        </div>
 
 
 </p>

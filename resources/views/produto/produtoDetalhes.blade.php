@@ -19,12 +19,9 @@
 
         <div class="col text-center">
         <a href="/EditarModeloDetalhado/{{$list->id_produto}}">
-            <button class="btn btn-outline-success">Editar</button>
+            <button style="margin-right: 30px;" class="btn btn-outline-success">Editar</button>
         </a>
-        </div>
 
-        
-        <div class="col text-center">
             <a href="/modelo/{{$list->marca_idmarca}}">
             <button class="btn btn-outline-primary">Voltar</button>
             </a>
