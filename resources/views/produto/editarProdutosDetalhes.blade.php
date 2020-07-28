@@ -68,17 +68,36 @@
         <br><br>
 
         <div class="col text-center">
-        <button style="margin-right: 30px"; type="submit" class="btn btn-outline-success">Salvar</button>
+            <button style="margin-right: 30px";
+                class="btn btn-outline-success"
+                type="submit"
+                value="Salvar">Salvar</button>
 
-
-
-     </form>
-        <a href="/modelo/{{$list->marca_idmarca}}">
-        <button class="btn btn-outline-danger">Cancelar</button>
-        </a>
+            <a class="btn btn-outline-danger" href="/modelo/{{$list->marca_idmarca}}" role="button">Cancelar</a>
         </div>
 
 
+        {{--
+        <div class="col text-center">
+        <button style="margin-right: 30px";
+        type="submit"
+        class="btn btn-outline-success">
+        Salvar
+        </button>
+        </div>
+
+        <div class="col text-center">
+        <a href="/modelo/{{$list->marca_idmarca}}">
+        <button class="btn btn-outline-danger">
+        Cancelar
+        </button>
+        </a>
+        </div>
+        --}}
+
+
+</form>
 </p>
 
     @endsection
+
