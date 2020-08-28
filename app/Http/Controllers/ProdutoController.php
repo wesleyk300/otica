@@ -6,8 +6,6 @@ use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\ModelMarca;
-use App\Models\ModelProduto;
-use App\User;
 
 class ProdutoController extends Controller
 {
@@ -33,6 +31,7 @@ class ProdutoController extends Controller
         $replace = array('', '.');
         $valorEntrada = str_replace($source, $replace, $request->entrada);
         $valorSaida = str_replace($source, $replace, $request->saida);
+<<<<<<< Updated upstream
        
 
               DB::table('produto')->insert([
@@ -43,6 +42,22 @@ class ProdutoController extends Controller
                 'estoque'=>$request->quantidade,
                 'valor_entrada'=>$valorEntrada,
                 'valor_saida'=>$valorSaida                
+=======
+        $tipo = 'Armação';
+
+
+              DB::table('produto')
+                    ->insert([
+                    'marca_idmarca'=>$request->marca,
+                    'modelo_produto'=>$request->modelo,
+                    'cor_produto'=>$request->cor,
+                    'ref_produto'=>$request->referencia,
+                    'estoque'=>$request->quantidade,
+                    'valor_entrada'=>$valorEntrada,
+                    'valor_saida'=>$valorSaida,
+                    'tipo'=>$tipo
+
+>>>>>>> Stashed changes
             ]);
 
             
@@ -74,7 +89,74 @@ class ProdutoController extends Controller
                     ->join('marca', 'produto.marca_idmarca', '=', 'marca.idmarca')
                     ->where('id_produto', $id)
                     ->first();
+<<<<<<< Updated upstream
             return view ('produto.produtoDetalhes',compact('list')) ; 
+=======
+            return view ('produto.produtoDetalhes',compact('list')) ;
+    }
+
+    public function exibirModelos()
+    {
+        $list = DB::table('produto')
+                    ->join('marca', 'produto.marca_idmarca', '=', 'marca.idmarca')
+                    ->get();
+
+            return view ('produto.exibirModelo',compact('list')) ;
+    }
+
+
+
+    public function editarModelo($id)
+    {
+        $list = DB::table('produto')
+                    ->where('id_produto', $id)
+                    ->first();
+            return view ('produto.editarProdutosDetalhes',compact('list')) ;
+    }
+
+    public function saveUpdate(Request $request)
+    {
+        $source = array('.', ',');
+        $replace = array('', '.');
+        $valorEntrada = str_replace($source, $replace, $request->entrada);
+        $valorSaida = str_replace($source, $replace, $request->saida);
+
+        $request -> validate([
+            'modelo' => 'required',
+            'cor' => 'required',
+            'referencia' => 'required',
+            'quantidade' => 'required',
+            'entrada' => 'required',
+            'saida' => 'required'
+        ],[
+            'modelo.required' => 'Informar modelo',
+            'modelo.unique' => 'Modelo já existe',
+            'cor.required' => 'Informar cor',
+            'referencia.required' => 'Informar referência',
+            'quantidade.required' => 'Informar quantidade',
+            'entrada.required' => 'Informar entrda',
+            'saida.required' => 'Informar saída',
+        ]);
+
+
+
+              DB::table('produto')
+                    ->where('id_produto', $request->id_produto)
+                    ->update([
+                    'modelo_produto'=>$request->modelo,
+                    'cor_produto'=>$request->cor,
+                    'ref_produto'=>$request->referencia,
+                    'estoque'=>$request->quantidade,
+                    'valor_entrada'=>$valorEntrada,
+                    'valor_saida'=>$valorSaida
+                    ]);
+
+
+
+                return redirect()->route('modelo', [$request->marca_idmarca])
+                        ->with('mensagemDeSucesso', 'Modelo editado com sucesso.');
+
+>>>>>>> Stashed changes
     }
 
       
