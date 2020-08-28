@@ -5,14 +5,14 @@
 
 <div class="limiter">
 		<div class="container-table100">
-			<div class="wrap-table100">	
+			<div class="wrap-table100">
 
 				<div class="table100 ver2 m-b-110">
 					<table data-vertable="ver2">
 						<thead>
-							<tr class="row100 head">								
-								
-							
+							<tr class="row100 head">
+
+
 								<th class="column100 column3" data-column="column3">Modelo</th>
 								<th class="column100 column4" data-column="column4">Cor</th>
 								<th class="column100 column5" data-column="column5">REF</th>
@@ -26,8 +26,8 @@
                             @foreach($list as $lists)
 
 							<tr class="row100">
-								
-								
+
+
 								<td class="column100 column3" data-column="column3">{{$lists->modelo_produto}}</td>
 								<td class="column100 column4" data-column="column4">{{$lists->cor_produto}}</td>
 								<td class="column100 column5" data-column="column5">{{$lists->ref_produto}}</td>
@@ -37,16 +37,16 @@
 								<td class="column100 column9" data-column="column9">{{$lists->estoque}}</td>
 							</tr>
 
-							
-                            @endforeach
-							
 
-							
+                            @endforeach
+
+
+
 						</tbody>
 					</table>
 				</div>
 
-				
+
 			</div>
 		</div>
 	</div>

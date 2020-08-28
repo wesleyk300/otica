@@ -10,7 +10,7 @@ class MarcaControler extends Controller
 {
 
     private $objMarca;
-    
+
     public function __construct(){
         $this->objMarca = new ModelMarca();
 
@@ -21,8 +21,8 @@ class MarcaControler extends Controller
     public function index()
     {
     $list=  $this->objMarca->all();
-   
-        return view ('armacao.consultaarmacao',compact('list')) ; 
+
+        return view ('marca.consultaarmacao',compact('list')) ;
     }
 
 
@@ -32,16 +32,16 @@ class MarcaControler extends Controller
             DB::table('marca')->insert([
                 'nome_marca'=>$request->marca
             ]);
-            
+
             return redirect()->route('register.marca.armacao')
                     ->with('mensagem', 'Marca cadastrado com sucesso.');
 
     }
-    
-    
+
+
     public function createMarca()
     {
-        return view ('armacao.saveMarca') ;
+        return view ('marca.saveMarca') ;
     }
 
 
@@ -51,37 +51,37 @@ class MarcaControler extends Controller
     }
 
 
-    
-  
 
-    
+
+
+
     public function store(Request $request)
     {
         //
     }
 
-    
+
     public function show($id)
     {
 
     }
 
-    
 
-    
+
+
     public function edit($id)
     {
         //
     }
 
-    
-    
+
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    
+
     public function destroy($id)
     {
         //

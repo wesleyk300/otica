@@ -26,9 +26,17 @@
 								<td class="column100 colum2" data-column="column2">{{$lists->nome_marca}}</td>
 								<td class="column100 colum3" data-column="column3">{{$lists->idmarca}}</td>
 								<td class="column100 column4" data-column="column4">
+<<<<<<< Updated upstream:resources/views/armacao/consultaarmacao.blade.php
 								<a href="/modelo/{{$lists->idmarca}}"> 
 								<button class="btn btn-dark">Consultar</button>	
 								</a>
+=======
+                                    <div class="col text-center">
+								<a href="/modelo/{{$lists->idmarca}}">
+								<button class="btn btn-outline-dark">Consultar</button>
+                            </a>
+                        </div>
+>>>>>>> Stashed changes:resources/views/marca/consultaarmacao.blade.php
 								</td>
 								</tr>
 

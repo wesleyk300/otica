@@ -17,6 +17,17 @@
         Valor Saída: </br>{{number_format($list->valor_saida, 2, ',', '.')}}</br></br>
         Estoque:</br>{{$list->estoque}}</br></br>
 
+<<<<<<< Updated upstream
+=======
+
+
+        <a href="/EditarModeloDetalhado/{{$list->id_produto}}">
+            <button class="btn btn-outline-success">Editar</button>
+        </a>
+
+        </br></br>
+
+>>>>>>> Stashed changes
 </div>
 
 @endsection
