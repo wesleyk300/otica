@@ -19,13 +19,13 @@
     @endif
 
 
-    
-    
+
+
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
           <?php
-          $count=0;            
+          $count=0;
             foreach ($errors->all() as $error){
               $count++;
                 echo "$count - $error</br>";
@@ -46,11 +46,11 @@
 
         <select class="browser-default custom-select" name="marca">
            <option value="" selected>Selecione</option>
-           
+
            @foreach($list as $lists)
            @if($lists->idmarca == old('marca'))
 
-              <option value="{{$lists->idmarca}}" selected>{{$lists->nome_marca}}</option>                
+              <option value="{{$lists->idmarca}}" selected>{{$lists->nome_marca}}</option>
               @else
 
               <option value="{{$lists->idmarca}}">{{$lists->nome_marca}}</option>
@@ -58,8 +58,8 @@
               @endif
             @endforeach
 
-                          
-            
+
+
           </select>
 
 
@@ -102,5 +102,7 @@
     </form>
     <div></div>
     </p>
+
+
 
     @endsection
