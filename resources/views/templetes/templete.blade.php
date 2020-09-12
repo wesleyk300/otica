@@ -35,71 +35,7 @@
 
 </head>
 <body>
-<!--===============================================================================================-->
-<nav>
-	<div class="logo">
-	Ótica Imperatriz</div>
-<label for="btn" class="icon">
-	  <span class="fa fa-bars"></span>
-	</label>
-	<input type="checkbox" id="btn">
-	<ul>
-<li><a href="">TESTE#</a></li>
-<li>
-		<label for="btn-1" class="show">Features +</label>
-		<a href="#">Armação</a>
-		<input type="checkbox" id="btn-1">
-		<ul>
-<li><a href="/marca">Marcas</a></li>
-<li><a href="/modelos">Modelos</a></li>
-</ul>
-</li>
-<li>
-		<label for="btn-2" class="show">Services +</label>
-		<a href="#">Services</a>
-		<input type="checkbox" id="btn-2">
-		<ul>
-<li><a href="#">Web Design</a></li>
-<li><a href="#">App Design</a></li>
-<li>
-			<label for="btn-3" class="show">More +</label>
-			<a href="#">More <span class="fa fa-plus"></span></a>
-			<input type="checkbox" id="btn-3">
-			<ul>
-<li><a href="#">Submenu-1</a></li>
-<li><a href="#">Submenu-2</a></li>
-<li><a href="#">Submenu-3</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#">Portfolio</a></li>
-<li><a href="#">Contact</a></li>
 
-<li>
-	<label for="btn-2" class="show">Services +</label>
-	<a href="#">Services</a>
-	<input type="checkbox" id="btn-2">
-	<ul>
-<li><a href="#">Web Design</a></li>
-<li><a href="#">App Design</a></li>
-<li>
-		<label for="btn-3" class="show">More +</label>
-		<a href="#">More <span class="fa fa-plus"></span></a>
-		<input type="checkbox" id="btn-3">
-		<ul>
-<li><a href="#">Submenu-1</a></li>
-<li><a href="#">Submenu-2</a></li>
-<li><a href="#">Submenu-3</a></li>
-</ul>
-</li>
-</ul>
-</li>
-
-
-
-</ul>
-</nav>
 
 
 
@@ -138,7 +74,10 @@
 		$('.icon').click(function(){
 		  $('span').toggleClass("cancel");
 		});
-	  </script>
+      </script>
+
+
+
 	  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>

@@ -49,6 +49,11 @@
         value="{{old('cpf')}}">
         <br>
 
+        <label for="exampleFormControlInput1">Endereço:</label>
+        <input name="endereco" type="text" class="form-control" placeholder="Digite..."
+        value="{{old('endereco')}}">
+        <br>
+
         <label for="exampleFormControlInput1">Data de Nascimento:</label>
         <input name="data_nascimento" type="date" class="form-control" id="exampleFormControlInput1" placeholder="Digite..."
         value="{{old('data_nascimento')}}">

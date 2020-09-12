@@ -28,11 +28,13 @@
 
         <form class="form-horizontal" method="post" action="{{route('venda.salvar')}}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
             <div class="container">
                 <div class="row">
                     <fieldset>
                         <!-- Form Name -->
                         <!-- Text input-->
+                        <h1 style="text-align: center; ">Registrar Venda</h1><br>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="cliente">Nome da Cliente</label>

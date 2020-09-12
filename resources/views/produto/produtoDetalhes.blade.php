@@ -6,7 +6,7 @@
 
 <div class="text-center">
 
-           
+
         COD Marca: </br>{{$list->idmarca}} </br></br>
         COD Modelo: </br>{{$list->idmarca}} </br></br>
         Nome Marca: </br>{{$list->nome_marca}} </br></br>
@@ -17,8 +17,6 @@
         Valor Saída: </br>{{number_format($list->valor_saida, 2, ',', '.')}}</br></br>
         Estoque:</br>{{$list->estoque}}</br></br>
 
-<<<<<<< Updated upstream
-=======
 
 
         <a href="/EditarModeloDetalhado/{{$list->id_produto}}">
@@ -27,7 +25,6 @@
 
         </br></br>
 
->>>>>>> Stashed changes
 </div>
 
 @endsection

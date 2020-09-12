@@ -10,17 +10,17 @@ use App\Models\ModelMarca;
 class ProdutoController extends Controller
 {
     private $objMarca;
-    
+
     public function __construct(){
         $this->objMarca = new ModelMarca();
 
     }
 
     public function index()
-    {   
+    {
         $list=  $this->objMarca->all();
-    
-        return view('produto.saveModelo', compact('list')); 
+
+        return view('produto.saveModelo', compact('list'));
     }
 
 
@@ -31,18 +31,6 @@ class ProdutoController extends Controller
         $replace = array('', '.');
         $valorEntrada = str_replace($source, $replace, $request->entrada);
         $valorSaida = str_replace($source, $replace, $request->saida);
-<<<<<<< Updated upstream
-       
-
-              DB::table('produto')->insert([
-                'marca_idmarca'=>$request->marca,
-                'modelo_produto'=>$request->modelo,
-                'cor_produto'=>$request->cor,
-                'ref_produto'=>$request->referencia,
-                'estoque'=>$request->quantidade,
-                'valor_entrada'=>$valorEntrada,
-                'valor_saida'=>$valorSaida                
-=======
         $tipo = 'Armação';
 
 
@@ -57,16 +45,15 @@ class ProdutoController extends Controller
                     'valor_saida'=>$valorSaida,
                     'tipo'=>$tipo
 
->>>>>>> Stashed changes
             ]);
 
-            
+
             return redirect()->route('salvar.modelo.armacao')
                     ->with('mensagem', 'Modelo cadastrado com sucesso.');
 
     }
 
-    
+
 
 
 
@@ -79,19 +66,16 @@ class ProdutoController extends Controller
             ->select('id_produto', 'modelo_produto')
             ->where('marca_idmarca', $id)
             ->get();
-            return view ('produto.modelo',compact('list')) ; 
+            return view ('produto.modelo',compact('list')) ;
     }
 
-    
+
     public function mostrarModeloDetalhes($id)
     {
         $list = DB::table('produto')
                     ->join('marca', 'produto.marca_idmarca', '=', 'marca.idmarca')
                     ->where('id_produto', $id)
                     ->first();
-<<<<<<< Updated upstream
-            return view ('produto.produtoDetalhes',compact('list')) ; 
-=======
             return view ('produto.produtoDetalhes',compact('list')) ;
     }
 
@@ -156,18 +140,17 @@ class ProdutoController extends Controller
                 return redirect()->route('modelo', [$request->marca_idmarca])
                         ->with('mensagemDeSucesso', 'Modelo editado com sucesso.');
 
->>>>>>> Stashed changes
     }
 
-      
-    
+
+
     /*public function index($id)
     {
         $list = DB::table('produto')
             ->where('marca_idmarca',$id)
             ->get();
-        
-        return view ('armacao.index',compact('list')) ; 
+
+        return view ('armacao.index',compact('list')) ;
     }*/
 
 
@@ -177,7 +160,7 @@ class ProdutoController extends Controller
     {
         $lsit=  $this->objProduto->all();
 
-        return view ('index',compact('lsit')) ; 
+        return view ('index',compact('lsit')) ;
     }
 */
 
@@ -214,7 +197,7 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-    
+
     }
 
     /**

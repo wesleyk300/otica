@@ -17,11 +17,10 @@ class Cliente extends Migration
             $table->increments('id_cliente');
             $table->string('nome_cliente',45)->nullable()->default(NULL);
             $table->string('cpf_cliente',14)->nullable()->default(NULL);
+            $table->string('endereco',100)->nullable()->default(NULL);
             $table->date('data_nascimento')->nullable()->default(NULL);
             $table->string('telefone_cliente',15)->nullable()->default(NULL);
             $table->string('celular_cliente',15)->nullable()->default(NULL);
-           // $table->unsignedInteger('venda_id_venda')->nullable()->default(NULL);
-            //$table->foreignId('venda_id_venda')->constrained('venda');
         });
     }
 

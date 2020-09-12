@@ -134,7 +134,15 @@ function construirDiv(produto,id,valor){
 	hiddenProduto.setAttribute("id", "fk_produto");
 	hiddenProduto.setAttribute("name", "saida[fk_produto][]");
 	hiddenProduto.setAttribute("type", "hidden");
-	linhaDiv.appendChild(hiddenProduto);
+    linhaDiv.appendChild(hiddenProduto);
+
+    //hidden produto
+    let hiddenVenda = document.createElement("input");
+	hiddenVenda.value = valor;
+	hiddenVenda.setAttribute("id", "valor");
+	hiddenVenda.setAttribute("name", "saida[valor][]");
+	hiddenVenda.setAttribute("type", "hidden");
+	linhaDiv.appendChild(hiddenVenda);
 
 	//criação input quantidade
 	let colDiv2 = document.createElement("div");

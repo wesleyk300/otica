@@ -32,6 +32,7 @@ class ClienteController extends Controller
                     ->insert([
                     'nome_cliente'=>$request->nome,
                     'cpf_cliente'=>$request->cpf,
+                    'endereco'=>$request->endereco,
                     'data_nascimento'=>$request->data_nascimento,
                     'telefone_cliente'=>$request->telefone,
                     'celular_cliente'=>$request->celular,
