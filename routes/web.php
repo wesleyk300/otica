@@ -70,5 +70,9 @@ Route::get('/pesquisar/nome/{id}','ConsultaController@listarConsultas')->name('l
 //MOSTAR CONSULTA DETALHADA
 Route::get('/pesquisar/detalhe/{id}','ConsultaController@consultaDetalhada')->name('pesquisa.detalhada'); //pega os dados para registrar no banco
 
+//EDITAR E SALVAR CONSULTA
+Route::get('/consulta/editarConsulta/{id}','ConsultaController@editarConsulta')->name('editar.consulta'); //pega os dados para registrar no banco
+Route::post('/consulta/salvarConsulta','ConsultaController@salvarConsulta')->name('salvar.consulta'); //pega os dados para registrar no banco
+
 
 

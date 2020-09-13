@@ -12,6 +12,7 @@
     <br>
     <hr>
 
+
     @foreach ($resultado as $item)
     @csrf
         <h4>Nome:</h4>

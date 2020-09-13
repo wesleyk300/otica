@@ -25,7 +25,7 @@
 
         <br>
         <br>
-    
+
 
 
         @foreach ($resultado as $item)

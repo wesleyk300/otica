@@ -124,12 +124,43 @@ class ConsultaController extends Controller
         return view('consulta.resultadoConsulta', compact ('resultado'));
     }
 
-    public function consultaDetalhada ()
+    public function consultaDetalhada ($id)
     {
+            $resultado = $this->buscaConsultaId($id);
 
+            return view('consulta.consultaDetalhada', compact ('resultado'));
+    }
+
+
+    public function editarConsulta ($id)
+    {
+            $resultado = $this->buscaConsultaId($id);
+
+            return view('consulta.editarConsulta', compact ('resultado'));
+    }
+    public function salvarConsulta (Request $request)
+    {
+        DB::table('consultas')
+                    ->where('id_consulta', $request->id_consulta)
+                    ->update([
+                        'od_longe'=>$request->odlonge,
+                        'od_esf'=>$request->odesf,
+                        'od_cil'=>$request->odcil,
+                        'od_eixo'=>$request->odeixo,
+                        'oe_longe'=>$request->oelonge,
+                        'oe_esf'=>$request->oeesf,
+                        'oe_cil'=>$request->oecil,
+                        'oe_eixo'=>$request->oeeixo,
+                    ]);
+
+
+                return redirect()->back()
+                        ->with('mensagemeditada', 'Editado com sucesso.');
 
     }
 
+
+///////////////////////////////////////////////////////////////////////////////////
 
     public function listarConsultaId($id)
     {
@@ -140,6 +171,7 @@ class ConsultaController extends Controller
 
         return $resultado;
     }
+
     public function buscaClienteCpf($cpf)
     {
         $resultado = DB::table('cliente')
@@ -149,8 +181,6 @@ class ConsultaController extends Controller
         return $resultado;
     }
 
-
-
     public function buscaClienteId($id_cliente)
     {
         $resultado = DB::table('cliente')
@@ -159,11 +189,21 @@ class ConsultaController extends Controller
 
         return $resultado;
     }
+
+
     public function buscaClienteNome($nome)
     {
         $resultado = DB::table('cliente')
                 ->where('nome_cliente', 'like', '%'.$nome.'%')
                 ->get();
+
+        return $resultado;
+    }
+    public function buscaConsultaId($id)
+    {
+        $resultado = DB::table('consultas')
+                ->where('id_consulta', $id)
+                ->first();
 
         return $resultado;
     }
