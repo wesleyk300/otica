@@ -6,19 +6,19 @@
 
 @font-face {
   font-family: Montserrat-Regular;
-  src: url('../fonts/montserrat/Montserrat-Regular.ttf'); 
+  src: url('../fonts/montserrat/Montserrat-Regular.ttf');
 }
 
 @font-face {
   font-family: Montserrat-Medium;
-  src: url('../fonts/montserrat/Montserrat-Medium.ttf'); 
+  src: url('../fonts/montserrat/Montserrat-Medium.ttf');
 }
 
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 * {
-	margin: 0px; 
-	padding: 0px; 
+	margin: 0px;
+	padding: 0px;
 	box-sizing: border-box;
 }
 
@@ -97,10 +97,10 @@ iframe {
 }
 
 .container-table100 {
-  
+
   width: 100%;
-  min-height: 100vh;
-  background: #d1d1d1;
+  min-height: 60vh;
+  /*background: #d1d1d1;*/
 
   display: -webkit-box;
   display: -webkit-flex;
@@ -114,11 +114,11 @@ iframe {
 }
 
 .wrap-table100 {
-  width: 1300px;
+  width: 1000px;
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ Table ]*/
+/*//////////////////////////////////////////////////////////////////*/
+
 table {
   width: 100%;
   background-color: #fff;
@@ -150,14 +150,15 @@ th, td {
 }
 
 
-/*==================================================================
+/*==================================================================*/
 
-[ Ver2 ]*/
+
 .table100.ver2 td {
   font-family: Montserrat-Regular;
   font-size: 14px;
   color: black;
   line-height: 1.4;
+  text-align: center;
 }
 
 .table100.ver2 th {
@@ -166,27 +167,29 @@ th, td {
   color: #fff;
   line-height: 1.4;
   text-transform: uppercase;
-
+  text-align: center;
   background-color: #333333;
 }
 
 .table100.ver2 .row100:hover td {
-  background-color: #83d160;
-  color: #fff;
-}
+  background-color: #E0FFFF; /*linha horizontal*/
+  color:black;
 
+}
+/*
 .table100.ver2 .hov-column-ver2 {
-  background-color: #83d160;
-  color: #fff;
+  background-color:#E0FFFF; linha vertivcal
+  color: black;
 }
-
+*/
 .table100.ver2 .hov-column-head-ver2 {
-  background-color: #484848 !important;
+  background-color: #484848 !important; /*cor da coluna do titulo*/
 }
 
 .table100.ver2 .row100 td:hover {
-  background-color: #57b846;
-  color: #fff;
+  background-color: #B0E0E6;
+  color: black;
+
 }
 
-/*==================================================================
+
