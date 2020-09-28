@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\ModelLente;
 use App\Models\ModelMarca;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 
 class ProdutoLenteController extends Controller
@@ -23,6 +24,98 @@ class ProdutoLenteController extends Controller
         $list=  $this->objMarca->all();
 
         return view('lente.lente', compact('list'));
+    }
+
+    public function buscarLente()
+    {
+        return view('lente.buscarlente');
+    }
+
+    public function editarlente ($id)
+    {
+        $list = DB::table('produto')
+                    ->where('id_produto', $id)
+                    ->first();
+            return view ('lente.editarLentesDetalhes',compact('list')) ;
+    }
+    public function excluirLente ($id)
+    {
+        DB::table('produto')
+                ->where('id_produto', $id)
+                  ->update(['status_produto' => 1]);
+
+        return redirect()->route('buscar.lente')->with('mensagem','Deletado com sucesso.');
+    }
+
+
+    public function editarSavelente (Request $request)
+    {
+
+        $source = array('.', ',');
+        $replace = array('', '.');
+        $valorEntrada = str_replace($source, $replace, $request->entrada);
+        $valorSaida = str_replace($source, $replace, $request->saida);
+
+        $request -> validate([
+            'modelo_produto' => ['required', Rule::unique('produto')->ignore($request->id_produto,'id_produto')],
+            'cor' => 'required',
+            'referencia' => 'required',
+            'tratamento' => 'required',
+            'quantidade' => 'required',
+            'entrada' => 'required',
+            'saida' => 'required'
+        ],[
+            'modelo_produto.required' => 'Informar modelo',
+            'modelo_produto.unique' => 'Modelo já existe',
+            'cor.required' => 'Informar cor',
+            'referencia.required' => 'Informar referência',
+            'tratamento.required' => 'Informar tratamento',
+            'quantidade.required' => 'Informar quantidade',
+            'entrada.required' => 'Informar entrda',
+            'saida.required' => 'Informar saída',
+        ]);
+
+
+
+              DB::table('produto')
+                    ->where('id_produto', $request->id_produto)
+                    ->update([
+                    'modelo_produto'=>$request->modelo_produto,
+                    'cor_produto'=>$request->cor,
+                    'ref_produto'=>$request->referencia,
+                    'tratamento_produto'=>$request->tratamento,
+                    'estoque'=>$request->quantidade,
+                    'valor_entrada'=>$valorEntrada,
+                    'valor_saida'=>$valorSaida
+                    ]);
+
+
+
+                /*return redirect()->route('modelo', [$request->marca_idmarca])
+                        ->with('mensagemDeSucesso', 'Modelo editado com sucesso.');*/
+
+                return redirect()->route('buscar.lente')
+                        ->with('mensagem', 'Modelo editado com sucesso.');
+    }
+
+    public function pesquisarLente(Request $request)
+    {
+
+        $list = DB::table('produto')
+        ->join('marca', 'produto.marca_idmarca', '=', 'marca.idmarca')
+        ->where('modelo_produto', 'like', '%'.$request->nome.'%')
+        ->where('tipo','Lente')
+        ->where('status_produto',0)
+        ->get();
+
+        $count = $list->count();
+
+        if ($count>0) {
+            return view ('lente.exibirModelo',compact('list')) ;
+        } else {
+            return redirect()->back()->with('mensagem','Nenhum resultado encontrado');
+        }
+
     }
 
 
@@ -55,8 +148,8 @@ class ProdutoLenteController extends Controller
 
             ]);
 
-            return redirect()->route('salvar.modelo.armacao')
-                    ->with('mensagem', 'Modelo cadastrado com sucesso.');
+            return redirect()->route('salvar.modelo.lente')
+                    ->with('mensagem', 'Modelo de lente cadastrado com sucesso.');
 
     }
 
@@ -66,7 +159,7 @@ class ProdutoLenteController extends Controller
 
 
 
-
+/*
     public function mostrarModelo($id)
     {
         $list = DB::table('produto')
@@ -148,96 +241,7 @@ class ProdutoLenteController extends Controller
                         ->with('mensagemDeSucesso', 'Modelo editado com sucesso.');
 
     }
-
-
-
-    /*public function index($id)
-    {
-        $list = DB::table('produto')
-            ->where('marca_idmarca',$id)
-            ->get();
-
-        return view ('armacao.index',compact('list')) ;
-    }*/
-
-
-
-
-    /*public function index()
-    {
-        $lsit=  $this->objProduto->all();
-
-        return view ('index',compact('lsit')) ;
-    }
 */
 
 
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

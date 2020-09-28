@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class ModelMarca extends Model
 {
     protected $table='marca';
+    protected $primaryKey='idmarca';
+
 }

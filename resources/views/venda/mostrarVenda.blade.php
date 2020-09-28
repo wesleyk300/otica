@@ -86,7 +86,7 @@
       <th scope="row">{{$item->id_produto}}</th>
       <td>{{$item->modelo_produto}}</td>
       <td>{{$item->quantidade_saida}}</td>
-      <td>{{number_format($item->valor_saida, 2, ',', '.')}}</td>
+      <td>{{number_format($item->valor_saida_venda, 2, ',', '.')}}</td>
       <td>{{number_format($item->subtotal, 2, ',', '.')}}</td>
     </tr>
  @endforeach

@@ -99,8 +99,8 @@ iframe {
 .container-table100 {
 
   width: 100%;
-  min-height: 100vh;
-  background: #d1d1d1;
+  min-height: 60vh;
+  /*background: #d1d1d1;*/
 
   display: -webkit-box;
   display: -webkit-flex;
@@ -114,7 +114,7 @@ iframe {
 }
 
 .wrap-table100 {
-  width: 1500px;
+  width: 1000px;
 }
 
 /*//////////////////////////////////////////////////////////////////*/

@@ -20,7 +20,19 @@
 
         <meta name="viewport" content="width=device-width">
 
-    	<title>Controle de Estoque Purchase Store</title>
+        <title>Controle de Estoque Purchase Store</title>
+        <br><br>
+        <div class="form-style-1">
+            <div class="d-flex justify-content-center">
+                 @if (session('mensagem'))
+                      <div style="width: 40%"; class="alert alert-success">
+                            {{ session('mensagem') }}
+                        </div>
+                  @endif
+            </div>
+            </div>
+
+
     </head>
     <body>
 
@@ -41,8 +53,12 @@
                                 <div class="col-md-3">
                                     <select style="width:300%;" id="nomeClientes" name="fk_cliente" class="form-control">
                                         @foreach($cliente as $c)
-                                            <option value="{{ $c->id_cliente }}">{{ $c->cpf_cliente }} - {{ $c->nome_cliente }}</option>
-                                        @endforeach
+
+                                            <option value="{{ $c->id_cliente }}">
+                                                {{ $c->cpf_cliente }} - {{ $c->nome_cliente }}
+                                            </option>
+
+                                            @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -54,8 +70,10 @@
                                 <div class="col-md-3">
                                     <select style="width:300%;" id="categoria" class="form-control">
                                         @foreach($produto as $p)
-                                            <option label="{{ $p->valor_saida }}" value="{{ $p->id_produto }}">{!! $p->modelo_produto !!} - {!! $p->ref_produto !!}
-                                                - ({!! $p->estoque !!})</option>
+                                            <option label="{{ $p->valor_saida }}" value="{{ $p->id_produto }}">
+
+                                                {!! $p->modelo_produto !!}  -  REF: {!! $p->ref_produto !!}
+                                                - Estoque: {!! $p->estoque !!}</option>
                                         @endforeach
                                     </select>
                                     <br>

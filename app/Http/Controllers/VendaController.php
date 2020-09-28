@@ -17,9 +17,12 @@ class VendaController extends Controller
     public function index()
     {
         $produto = DB::table('produto')
+                        ->where('status_produto', 0)
+                        ->where('estoque', '>', 0)
                         ->get();
 
         $cliente = DB::table('cliente')
+                        ->where('status', 0)
                         ->get();;
         return view('venda.registrarVenda', compact('produto','cliente'));
     }
@@ -51,11 +54,13 @@ class VendaController extends Controller
         $id = $id->id_venda;
 
         for($i = 0;$i <= $tamanho - 1;$i++){
+
         $subtotal = $request["saida"]["quantidade"][$i] * $request["saida"]["valor"][$i];
+
                         Saida::create([
                             'fk_produto' => $request["saida"]["fk_produto"][$i],
                             'quantidade_saida' => $request["saida"]["quantidade"][$i],
-                            'valor_saida' => $request["saida"]["valor"][$i],
+                            'valor_saida_venda' => $request["saida"]["valor"][$i],
                             'subtotal' => $subtotal,
                             'fk_venda' => $id
                         ]);
@@ -64,7 +69,21 @@ class VendaController extends Controller
 
         for($i = 0;$i <= $tamanho - 1;$i++){
 
-        DB::update('update produto set estoque = estoque - ?
+                $quantidadeProduto = DB::table('produto')
+                    ->where('id_produto',$request["saida"]["fk_produto"][$i])
+                    ->first();
+
+                /*dd($quantidadeProduto, $request["saida"]["fk_produto"][$i],
+                            $quantidadeProduto->estoque, $request["saida"]["quantidade"][$i] );*/
+
+            if ( $request["saida"]["quantidade"][$i]  > $quantidadeProduto->estoque  ) {
+           $teste = $quantidadeProduto->modelo_produto;
+                return redirect()->back()->with('mensagem'
+
+                            ,'Produto '.$quantidadeProduto->modelo_produto.', quantidade maior do que a do estoque');
+
+            } else {
+                DB::update('update produto set estoque = estoque - ?
                     where
                     id_produto = ?',
                     [
@@ -81,6 +100,12 @@ class VendaController extends Controller
         //dd($queryClientItens);
 
         return view('venda.mostrarVenda', compact ('clienteVenda', 'itens'));
+
+            }
+
+
+
+
     }
 
     public function gerarPDF($id)

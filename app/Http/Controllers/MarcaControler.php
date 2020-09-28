@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ModelMarca;
+use Dompdf\Positioner\TableRow;
 use Illuminate\Support\Facades\DB;
 
 class MarcaControler extends Controller
@@ -20,9 +21,27 @@ class MarcaControler extends Controller
 
     public function index()
     {
-    $list=  $this->objMarca->all();
+        return view ('marca.pesquisarmarcas') ;
+    }
 
-        return view ('marca.consultaarmacao',compact('list')) ;
+
+    public function localizarNome(Request $request)
+    {
+        $resultado = DB::table('marca')
+                ->where('nome_marca', 'like', '%'.$request->nome.'%')
+                ->get();
+
+        $count = count($resultado);
+
+                if ($count>0) {
+                    return view ('marca.consultaarmacao', compact('resultado')) ;
+                } else {
+                   return redirect()->back()->with('mensagem', 'Nenhum dado encontrado');
+                }
+
+
+
+
     }
 
 
@@ -37,6 +56,22 @@ class MarcaControler extends Controller
                     ->with('mensagem', 'Marca cadastrado com sucesso.');
 
     }
+      public function editarMarca ($id)
+    {
+        $id = ModelMarca::find($id);
+
+        return view ('marca.editarmarca', compact('id')) ;
+
+    }
+      public function editarSaveMarca (Request $request)
+    {
+        DB::table('marca')
+              ->where('idmarca', $request->idmarca)
+              ->update(['nome_marca' => $request->marca]);
+
+        return redirect()->back()->with('mensagem','Alterado com sucesso TEWSTE');
+
+    }
 
 
     public function createMarca()
@@ -45,45 +80,5 @@ class MarcaControler extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
-
-
-
-
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
-    public function show($id)
-    {
-
-    }
-
-
-
-
-    public function edit($id)
-    {
-        //
-    }
-
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

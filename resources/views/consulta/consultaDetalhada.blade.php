@@ -6,6 +6,9 @@
 <p class="ex1">
 
     <div class="form-style-1">
+        <h4>COD:</h4>
+        <label for="exampleFormControlInput1">{{ $resultado->id_consulta }}</label>
+
         <h4>Data:</h4>
         <label for="exampleFormControlInput1">{{ date( 'd/m/Y' , strtotime($resultado->created_at))}}</label>
 
@@ -55,6 +58,7 @@
             role="button">
             Voltar
             </a>
+            
             <a
             class="btn btn-outline-warning"
             style="margin: 0 20px;"
@@ -63,14 +67,43 @@
             Editar
             </a>
 
-            <a
-            class="btn btn-outline-danger"
-            style="margin: 0 20px;"
-            href=""
-            role="button">
-            Excluir
-            </a>
+            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">
+                Excluir
+            </button>
+
             </div>
+
+
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Deseja realmente excluir?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Sair</button>
+          <a type="button"
+                    class="btn btn-outline-danger"
+                    href="/consulta/excluirConsulta/{{$resultado->id_consulta}}">
+                    Confirmar
+        </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 
 
 

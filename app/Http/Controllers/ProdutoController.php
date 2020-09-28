@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\ModelMarca;
+use App\Models\ModelProduto;
 
 class ProdutoController extends Controller
 {
@@ -56,17 +57,31 @@ class ProdutoController extends Controller
 
 
 
-
-
-
-
     public function mostrarModelo($id)
     {
         $list = DB::table('produto')
             ->select('id_produto', 'modelo_produto')
             ->where('marca_idmarca', $id)
             ->get();
-            return view ('produto.modelo',compact('list')) ;
+
+            $count = $list->count();
+
+            return view ('produto.modelo',compact('list','count'));
+    }
+    public function buscarModelo ()
+    {
+         return view ('produto.buscarmodelo');
+    }
+
+    public function excluir($id)
+
+
+    {
+        DB::table('produto')
+                ->where('id_produto', $id)
+                  ->update(['status_produto' => 1]);
+
+        return redirect()->route('buscar.modelo')->with('mensagem','Deletado com sucesso.');
     }
 
 
@@ -79,14 +94,37 @@ class ProdutoController extends Controller
             return view ('produto.produtoDetalhes',compact('list')) ;
     }
 
-    public function exibirModelos()
+    public function pesquisarModelo (Request $request)
+    {
+
+    $list = DB::table('produto')
+        ->join('marca', 'produto.marca_idmarca', '=', 'marca.idmarca')
+        ->where('modelo_produto', 'like', '%'.$request->nome.'%')
+        ->where('tipo','Armação')
+        ->where('status_produto',0)
+        ->get();
+
+        $count = $list->count();
+
+        if ($count>0) {
+            return view ('produto.exibirModelo',compact('list')) ;
+        } else {
+            return redirect()->back()->with('mensagem','Nenhum resultado encontrado');
+        }
+
+
+
+
+    }
+
+    /*public function exibirModelos()
     {
         $list = DB::table('produto')
                     ->join('marca', 'produto.marca_idmarca', '=', 'marca.idmarca')
                     ->get();
 
             return view ('produto.exibirModelo',compact('list')) ;
-    }
+    }*/
 
 
 
@@ -137,100 +175,14 @@ class ProdutoController extends Controller
 
 
 
-                return redirect()->route('modelo', [$request->marca_idmarca])
+                /*return redirect()->route('modelo', [$request->marca_idmarca])
+                        ->with('mensagemDeSucesso', 'Modelo editado com sucesso.');*/
+
+                return redirect()->route('modelo.detalhe', [$request->id_produto])
                         ->with('mensagemDeSucesso', 'Modelo editado com sucesso.');
 
     }
 
 
 
-    /*public function index($id)
-    {
-        $list = DB::table('produto')
-            ->where('marca_idmarca',$id)
-            ->get();
-
-        return view ('armacao.index',compact('list')) ;
-    }*/
-
-
-
-
-    /*public function index()
-    {
-        $lsit=  $this->objProduto->all();
-
-        return view ('index',compact('lsit')) ;
-    }
-*/
-
-
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

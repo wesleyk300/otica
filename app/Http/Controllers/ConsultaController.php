@@ -30,8 +30,8 @@ class ConsultaController extends Controller
     public function buscacpf(Request $request)
     {
 
-                $resultado  = $this->buscaClienteCpf($request->buscacpf);
-                $contador = $resultado->count();
+        $resultado  = $this->buscaClienteCpf($request->buscacpf);
+        $contador = $resultado->count();
 
         if ($contador > 0) {
             return view('consulta.resultadoConsulta', compact ('resultado'));
@@ -55,16 +55,22 @@ class ConsultaController extends Controller
     public function pesquisarCpf (Request $request)
     {
                 $resultado  = $this->buscaClienteCpf($request->buscacpf);
+
                 $contador = $resultado->count();
 
-        if ($contador > 0) {
-            return view('consulta.resultadoPesquisa', compact ('resultado'));
-        } else {
+        if ($contador > 0 ) {
+                    if ($resultado[0]->status ==0) {
+                        return view('consulta.resultadoPesquisa', compact ('resultado'));
+                    } else {
+                        return redirect()->route('pesquisar.consulta')
+                                ->with('mensagem', 'Cliente desativado');
+                    }
+        }
+       else {
             return redirect()->route('pesquisar.consulta')
                     ->with('mensagemcpf', 'CPF não encontrado');
         }
     }
-
 
     public function buscaNome(Request $request)
     {
@@ -100,28 +106,29 @@ class ConsultaController extends Controller
                     ->with('mensagem', 'Exame cadastrado com sucesso.');
     }
 
-
     public function listarConsultas($id)
     {
                 $resultado  = $this->listarConsultaId($id);
 
                 $contador = $resultado->count();
 
-                $clientes = DB::table('cliente')
-                ->where('id_cliente',$id)
-                ->first();
+                $clientes = $this->buscaClienteId($id);
 
 
                 if ($contador > 0) {
-
-                    return view('consulta.listarConsultas', compact ('resultado','clientes'));
+                        if ($clientes->status == 0) {
+                            return view('consulta.listarConsultas', compact ('resultado','clientes'));
+                        } else {
+                            return redirect()->route('pesquisar.consulta')
+                                    ->with('mensagem', 'Cliente desativado');
+                        }
 
                 } else {
                     return redirect()->route('pesquisar.consulta')
                             ->with('mensagem', 'Cliente não possui consulta registrada');
                 }
 
-        return view('consulta.resultadoConsulta', compact ('resultado'));
+       // return view('consulta.resultadoConsulta', compact ('resultado'));
     }
 
     public function consultaDetalhada ($id)
@@ -130,7 +137,6 @@ class ConsultaController extends Controller
 
             return view('consulta.consultaDetalhada', compact ('resultado'));
     }
-
 
     public function editarConsulta ($id)
     {
@@ -155,7 +161,52 @@ class ConsultaController extends Controller
 
 
                 return redirect()->back()
-                        ->with('mensagemeditada', 'Editado com sucesso.');
+                        ->with('mensagem', 'Editado com sucesso.');
+
+    }
+
+    public function excluirConsulta ($id){
+
+        $teste = DB::table('cliente')
+                            ->join('consultas', 'cliente.id_cliente', '=',
+                                    'consultas.fk_cliente_consulta')
+                            ->where('consultas.id_consulta', $id)
+                            ->select ('id_cliente')
+                            ->first();
+
+                 $excluir =DB::table('consultas')
+                            ->where('id_consulta', $id)
+                            ->delete();
+
+
+
+        $resultado = $this->listarConsultaId($teste->id_cliente);
+
+        $contador = $resultado->count();
+
+        $clientes = DB::table('cliente')
+                        ->where('id_cliente',$teste->id_cliente)
+                            ->first();
+
+        $id = $clientes->id_cliente;
+
+        if ($contador > 0) {
+
+            return redirect()->route('listar.consulta', [$id])
+                    ->with('excluido', 'Consulta excluída com sucesso ');
+
+        } else {
+            return redirect()->route('pesquisar.consulta')
+                    ->with('mensagem', 'Cliente não possui consulta registrada');
+        }
+
+        /*DB::table('consultas')
+                    ->where('id_consulta', $id)
+                    ->delete();
+
+
+                return redirect()->back()
+                        ->with('mensagemeditada', 'Editado com sucesso.');*/
 
     }
 

@@ -3,23 +3,19 @@
 @section('content')
 
 
+
+@if ($count>0)
+
 <div class="limiter">
 		<div class="container-table100">
 
-            <div class="d-flex justify-content-center">
-                @if (session('mensagemDeSucesso'))
-                        <div style="width: 200%"; class="alert alert-success">
-                            {{ session('mensagemDeSucesso') }}
-                        </div>
-                @endif
-            </div>
+
 
 
 			<div class="wrap-table100">
 
 				<div class="table100 ver2 m-b-110">
 					<table data-vertable="ver2">
-                        <H1>modelo.blade</H1>
 						<thead>
 							<tr class="row100 head">
 
@@ -48,14 +44,7 @@
                                     </a>
                                 </td>
 
-                                <td class="column100 column4" data-column="column4">
-                                    <a
-                                        class="btn btn-outline-danger"
-                                        href="#"
-                                        role="button">
-                                        Excluir
-                                    </a>
-                                </td>
+
 
 
                             </tr>
@@ -72,6 +61,14 @@
 		</div>
 
 
+
+
+
+@else
+<div class="form-style-1">
+    <H4>Nenhum modelo encontrado.</H4>
+</div>
+@endif
 
 
 

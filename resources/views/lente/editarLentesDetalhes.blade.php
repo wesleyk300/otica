@@ -4,9 +4,9 @@
 
 <p class="ex1">
     <div class="form-style-1">
-        <p class="font-weight-bolder">Editar Modelo de Armação</p>
+        <p class="font-weight-bolder">Editar Modelo de Lente</p>
 
-<form method="POST" action="{{route('update.modelo')}}">
+<form method="POST" action="{{route('editarsave.lente')}}">
     @csrf
       <p class="ex1">
       <div class="form-group">
@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col">
                     <label for="exampleFormControlInput1">Modelo:</label>
-                    <input name="modelo" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite..."
+                    <input name="modelo_produto" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite..."
                     value="{{$list->modelo_produto}}">
                     <br>
                 </div>
@@ -58,6 +58,14 @@
                     <br>
                 </div>
                 </div>
+
+
+
+                    <label for="exampleFormControlInput1">Tratamento:</label>
+                    <input name="tratamento" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite..."
+                    value="{{$list->tratamento_produto}}">
+                    <br>
+
 
 
 
@@ -90,7 +98,7 @@
                 type="submit"
                 value="Salvar">Salvar</button>
 
-            <a class="btn btn-outline-danger" href="/modelo/{{$list->marca_idmarca}}" role="button">Cancelar</a>
+            <a class="btn btn-outline-danger" href="/lente/editarsavemarca{{$list->id_produto}}" role="button">Cancelar</a>
         </div>
 
 
